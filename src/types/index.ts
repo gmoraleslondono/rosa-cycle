@@ -30,7 +30,7 @@ export interface ContraceptiveSettings {
 
 /** A logged or predicted menstrual period. Dates are ISO YYYY-MM-DD. */
 export interface Period {
-  id: string;
+  id: number;
   startDate: string;
   /** `null` while the period is ongoing or not yet ended. */
   endDate: string | null;

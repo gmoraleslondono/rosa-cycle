@@ -9,19 +9,18 @@ interface RosaCycleDB extends DBSchema {
 }
 
 //Open the database
-let db: IDBPDatabase<RosaCycleDB>;
+let dbPromise: Promise<IDBPDatabase<RosaCycleDB>> | null = null;
 
 //Get the database
 export async function getDB(): Promise<IDBPDatabase<RosaCycleDB>> {
-  if (db) return db;
-
-  db = await openDB<RosaCycleDB>("rosacycle-db", 1, {
-    upgrade(database) {
-      database.createObjectStore("periods", { keyPath: "id", autoIncrement: true });
-    },
-  });
-
-  return db;
+  if (!dbPromise) {
+    dbPromise = openDB<RosaCycleDB>("rosacycle-db", 1, {
+      upgrade(database) {
+        database.createObjectStore("periods", { keyPath: "id", autoIncrement: true });
+      },
+    });
+  }
+  return dbPromise;
 }
 
 // CRUD functions for period

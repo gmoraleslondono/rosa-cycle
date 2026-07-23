@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{json,js,cjs,ts}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\" \"*.{json,js,cjs,ts}\"",
+    "test": "vitest",
     "preview": "vite preview"
   },
   "dependencies": {

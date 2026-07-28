@@ -1,9 +1,16 @@
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PeriodView from "./views/PeriodView";
+
+export default function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-rosa-50 px-4">
-      <h1 className="text-3xl font-bold text-rosa-600 sm:text-4xl">RosaCycle</h1>
-    </main>
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto">
+        <main className="flex-1 overflow-y-auto pb-20">
+          <Routes>
+            <Route path="/" element={<PeriodView />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
-
-export default App;

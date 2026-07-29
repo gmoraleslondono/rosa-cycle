@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import { Pill, Calendar, BarChart2, Settings } from "lucide-react";
 
 const tabs = [
-  { to: "/track", icon: Pill, label: "Track" },
+  //   { to: "/track", icon: Pill, label: "Track" },
   { to: "/period", icon: Calendar, label: "Period" },
-  { to: "/insights", icon: BarChart2, label: "Insights" },
-  { to: "/settings", icon: Settings, label: "Settings" },
+  //   { to: "/insights", icon: BarChart2, label: "Insights" },
+  //   { to: "/settings", icon: Settings, label: "Settings" },
 ];
 
 export default function BottomNav() {

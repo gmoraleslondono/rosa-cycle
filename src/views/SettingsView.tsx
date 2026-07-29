@@ -1,0 +1,8 @@
+export default function SettingsView() {
+  return (
+    <div className="p-4">
+      <h1 className="text-xl font-medium text-gray-800">Settings</h1>
+      <p className="text-sm text-gray-400">Coming soon</p>
+    </div>
+  );
+}

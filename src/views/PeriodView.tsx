@@ -1,5 +1,11 @@
 import { useEffect } from "react";
 import { usePeriodStore } from "../stores/period";
+import CycleStats from "../components/period/CycleStats";
+import {
+  getAvgCycleLength,
+  getAvgPeriodLength,
+  daysUntilNextPeriod,
+} from "../utils/periodCalculations";
 
 export default function PeriodView() {
   const { periods, load, loading } = usePeriodStore();
@@ -34,9 +40,11 @@ export default function PeriodView() {
       </div>
 
       {/* Cycle stats */}
-      <div className="bg-gray-100 rounded-2xl p-4 text-center text-gray-400 text-sm">
-        CycleStats goes here
-      </div>
+      <CycleStats
+        avgCycleLength={getAvgCycleLength(periods)}
+        avgPeriodLength={getAvgPeriodLength(periods)}
+        daysUntilNext={daysUntilNextPeriod(periods)}
+      />
 
       {/* Calendar */}
       <div className="bg-gray-100 rounded-2xl p-4 text-center text-gray-400 text-sm h-64">

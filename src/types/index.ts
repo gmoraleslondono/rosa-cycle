@@ -60,3 +60,9 @@ export interface AppSettings {
   defaultPeriodLengthDays: number;
   onboardingComplete: boolean;
 }
+
+export interface CycleStatsProps {
+  avgCycleLength: number | null;
+  avgPeriodLength: number | null;
+  daysUntilNext: number | null;
+}

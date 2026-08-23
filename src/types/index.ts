@@ -1,11 +1,5 @@
 /** Supported contraceptive methods (Track tab adapts UI per type). */
-export type ContraceptiveType =
-  | "pills"
-  | "ring"
-  | "injection"
-  | "patch"
-  | "implant"
-  | "other";
+export type ContraceptiveType = "pills" | "ring" | "injection" | "patch" | "implant" | "other";
 
 /** User-configured contraceptive schedule for the current method. */
 export interface ContraceptiveSettings {
@@ -65,4 +59,10 @@ export interface CycleStatsProps {
   avgCycleLength: number | null;
   avgPeriodLength: number | null;
   daysUntilNext: number | null;
+}
+
+export interface PeriodCalendarProps {
+  periods: Period[];
+  predictedStart: Date | null;
+  avgPeriodLength: number | null;
 }

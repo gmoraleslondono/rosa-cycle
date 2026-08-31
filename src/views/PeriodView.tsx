@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { usePeriodStore } from "../stores/period";
 import CycleStats from "../components/period/CycleStats";
+import PeriodCalendar from "../components/period/PeriodCalendar";
 import {
   getAvgCycleLength,
   getAvgPeriodLength,
   daysUntilNextPeriod,
+  predictNextPeriod,
 } from "../utils/periodCalculations";
 
 export default function PeriodView() {
@@ -47,9 +49,11 @@ export default function PeriodView() {
       />
 
       {/* Calendar */}
-      <div className="bg-gray-100 rounded-2xl p-4 text-center text-gray-400 text-sm h-64">
-        PeriodCalendar goes here
-      </div>
+      <PeriodCalendar
+        periods={periods}
+        predictedStart={predictNextPeriod(periods)}
+        avgPeriodLength={getAvgPeriodLength(periods)}
+      />
 
       {/* Log button */}
       <div className="bg-gray-100 rounded-2xl p-4 text-center text-gray-400 text-sm">

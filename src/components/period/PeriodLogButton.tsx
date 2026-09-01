@@ -3,10 +3,14 @@ import { format } from "date-fns";
 import { usePeriodStore } from "../../stores/period";
 import LogForm from "./LogForm";
 
+function today(): string {
+  return format(new Date(), "yyyy-MM-dd");
+}
+
 export default function PeriodLogButton() {
   const { periods, add, update } = usePeriodStore();
   const [showForm, setShowForm] = useState(false);
-  const [startDate, setStartDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [startDate, setStartDate] = useState(today);
 
   async function handleLogPeriod() {
     await add({
@@ -17,6 +21,7 @@ export default function PeriodLogButton() {
       updatedAt: new Date().toISOString(),
     });
     setShowForm(false);
+    setStartDate(today());
   }
 
   async function handleEndPeriod() {
@@ -60,7 +65,10 @@ export default function PeriodLogButton() {
           {/* Log period button — only when no active period */}
           {!activePeriod && (
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => {
+                setStartDate(today());
+                setShowForm(true);
+              }}
               className="flex-1 py-3 rounded-xl bg-pink-400 text-white text-sm font-medium"
             >
               Log period

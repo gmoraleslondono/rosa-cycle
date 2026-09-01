@@ -10,7 +10,11 @@ function today(): string {
 export default function PeriodLogButton() {
   const { periods, add, update } = usePeriodStore();
   const [showForm, setShowForm] = useState(false);
+  const [showEndForm, setShowEndForm] = useState(false);
   const [startDate, setStartDate] = useState(today);
+  const [endDate, setEndDate] = useState(today);
+
+  const activePeriod = periods.find((p) => p.endDate === null);
 
   async function handleLogPeriod() {
     await add({
@@ -26,15 +30,13 @@ export default function PeriodLogButton() {
 
   async function handleEndPeriod() {
     if (!activePeriod) return;
-    await update({ ...activePeriod, endDate: format(new Date(), "yyyy-MM-dd") });
+    await update({ ...activePeriod, endDate });
+    setShowEndForm(false);
+    setEndDate(today());
   }
-
-  //find if there is a period with no end date
-  const activePeriod = periods.find((p) => p.endDate === null);
 
   return (
     <div className="bg-white rounded-2xl p-4 flex flex-col gap-3">
-      {/* Active period banner */}
       {activePeriod && (
         <div className="flex items-center gap-2 bg-pink-50 rounded-xl px-3 py-2">
           <div className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
@@ -42,7 +44,6 @@ export default function PeriodLogButton() {
         </div>
       )}
 
-      {/* Show form or buttons */}
       {showForm ? (
         <LogForm
           startDate={startDate}
@@ -50,19 +51,29 @@ export default function PeriodLogButton() {
           handleLogPeriod={handleLogPeriod}
           setShowForm={setShowForm}
         />
+      ) : showEndForm && activePeriod ? (
+        <LogForm
+          label="When did it end?"
+          startDate={endDate}
+          setStartDate={setEndDate}
+          handleLogPeriod={handleEndPeriod}
+          setShowForm={setShowEndForm}
+          min={activePeriod.startDate}
+        />
       ) : (
         <div className="flex gap-2">
-          {/* End period button — only when active */}
           {activePeriod && (
             <button
-              onClick={handleEndPeriod}
+              onClick={() => {
+                setEndDate(today());
+                setShowEndForm(true);
+              }}
               className="flex-1 py-3 rounded-xl border border-pink-200 text-pink-400 text-sm font-medium"
             >
               End period
             </button>
           )}
 
-          {/* Log period button — only when no active period */}
           {!activePeriod && (
             <button
               onClick={() => {

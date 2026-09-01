@@ -5,6 +5,8 @@ interface LogFormProps {
   setStartDate: (date: string) => void;
   handleLogPeriod: () => void;
   setShowForm: (show: boolean) => void;
+  min?: string;
+  label?: string;
 }
 
 export default function LogForm({
@@ -12,13 +14,16 @@ export default function LogForm({
   setStartDate,
   handleLogPeriod,
   setShowForm,
+  min,
+  label = "When did it start?",
 }: LogFormProps) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-sm font-medium text-gray-700">When did it start?</p>
+      <p className="text-sm font-medium text-gray-700">{label}</p>
       <input
         type="date"
         value={startDate}
+        min={min}
         max={format(new Date(), "yyyy-MM-dd")}
         onChange={(e) => setStartDate(e.target.value)}
         className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-pink-400"

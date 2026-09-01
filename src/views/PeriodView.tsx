@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { usePeriodStore } from "../stores/period";
 import CycleStats from "../components/period/CycleStats";
 import PeriodCalendar from "../components/period/PeriodCalendar";
+import PeriodLogButton from "../components/period/PeriodLogButton";
 import {
   getAvgCycleLength,
   getAvgPeriodLength,
@@ -24,14 +25,6 @@ export default function PeriodView() {
       </div>
     );
   }
-
-  // if (periods.length === 0) {
-  //   return (
-  //     <div className="flex items-center justify-center h-full">
-  //       <p className="text-gray-400">No periods found</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -56,9 +49,7 @@ export default function PeriodView() {
       />
 
       {/* Log button */}
-      <div className="bg-gray-100 rounded-2xl p-4 text-center text-gray-400 text-sm">
-        PeriodLogButton goes here
-      </div>
+      <PeriodLogButton />
     </div>
   );
 }

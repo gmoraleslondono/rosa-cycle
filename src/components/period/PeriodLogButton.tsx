@@ -30,7 +30,7 @@ export default function PeriodLogButton() {
 
   async function handleEndPeriod() {
     if (!activePeriod) return;
-    await update({ ...activePeriod, endDate });
+    await update({ ...activePeriod, endDate, updatedAt: new Date().toISOString() });
     setShowEndForm(false);
     setEndDate(today());
   }
